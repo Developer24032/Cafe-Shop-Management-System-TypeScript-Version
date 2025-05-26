@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export default class ApplicationError {
 	message?: string;
 	path?: string;
-	userId?: string;
+	customerId?: string;
 	statusCode?: number;
 	errors?: {
 		[key: string]: mongoose.Error.ValidatorError | mongoose.Error.CastError;
@@ -28,7 +28,7 @@ export default class ApplicationError {
 			errors: this.errors,
 			message: this.message,
 			path: this.path,
-			userId: this.userId,
+			customerId: this.customerId,
 			type: this.type,
 		};
 	}
@@ -44,6 +44,7 @@ export interface ApplicationErrorProps {
 	};
 }
 export enum ApplicationErrorType {
-	dbValidation = "dbValidation",
-	notFound = "Not-Found",
+	VALIDATION_ERROR = "VALIDATION_ERROR",
+	UNAUTHORIZED = "UNAUTHORIZED",
+	NOT_FOUND = "NOT_FOUND",
 }

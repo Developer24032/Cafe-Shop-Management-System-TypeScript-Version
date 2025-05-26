@@ -2,7 +2,7 @@ import { Schema, Types, model } from 'mongoose';
 
 export interface IReceipt{
     customer_id: Types.ObjectId;
-    total: number;
+    total_price: number;
     date: Date;
     employee_username: string;
 }
@@ -16,7 +16,7 @@ const receiptSchema = new Schema<IReceipt>({
 
     },
 
-    total:{
+    total_price: {
         type: Number,
         required: true,
         default: 0.0,
