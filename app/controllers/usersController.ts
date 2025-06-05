@@ -43,31 +43,6 @@ const addNewUser = tryCatchBlock(async (req: Request, res: Response) => {
   });
 });
 
-const LoginUser = tryCatchBlock(async (req: Request, res:Response) => {
-  const { username, password } = req.params;
-  if(!username || !password) {
-    throw new ApplicationError({
-      message: "Username and password are required",
-      type: ApplicationErrorType.NOT_FOUND,
-    });
-  }
-  const user = await User.findOne({ username });
-  if (!user) {
-    throw new ApplicationError({
-      message: "Invalid username or password",
-      type: ApplicationErrorType.UNAUTHORIZED,
-      statusCode: 401,
-    });
-  }
-  res.status(200).json({
-    status: "success",
-    data: {
-      user,
-    },
-    message: "User logged in successfully",
-  });
-})
-
 const getAllUsers = tryCatchBlock(async (req: Request, res: Response) => {
   const users = await User.find().populate("roleId");
   if (!users || users.length === 0) {
@@ -143,7 +118,6 @@ const deleteUser = tryCatchBlock(async (req: Request, res: Response) => {
 
 export {
     addNewUser,
-    LoginUser,
     getAllUsers,
     getUserById,
     updateUser,
