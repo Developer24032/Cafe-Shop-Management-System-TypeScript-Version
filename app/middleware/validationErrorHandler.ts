@@ -15,7 +15,7 @@ const validationErrorHandler = (
 		next(
 			new ApplicationError({
 				errors: error.errors,
-				type: ApplicationErrorType.dbValidation,
+				type: ApplicationErrorType.VALIDATION_ERROR,
 				statusCode: 422,
 			})
 		);

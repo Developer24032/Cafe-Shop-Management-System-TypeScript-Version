@@ -43,23 +43,6 @@ const addNewUser = tryCatchBlock(async (req: Request, res: Response) => {
   });
 });
 
-const getAllUsers = tryCatchBlock(async (req: Request, res: Response) => {
-  const users = await User.find().populate("roleId");
-  if (!users || users.length === 0) {
-    throw new ApplicationError({
-      message: "No users found",
-      type: ApplicationErrorType.NOT_FOUND,
-    });
-  }
-  res.status(200).json({
-    status: "success",
-    data: {
-      users,
-    },
-    message: "Users retrieved successfully",
-  });
-});
-
 const getUserById = tryCatchBlock(async (req: Request, res: Response) => {
   const { id } = req.params;
   const user = await User.findById(id).populate("roleId");
@@ -118,7 +101,6 @@ const deleteUser = tryCatchBlock(async (req: Request, res: Response) => {
 
 export {
     addNewUser,
-    getAllUsers,
     getUserById,
     updateUser,
     deleteUser,
